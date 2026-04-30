@@ -1,0 +1,172 @@
+:host {
+  display: block;
+  background: #f3f3f3;
+  padding: 18px 0 24px;
+}
+
+.contact-section {
+  width: 100%;
+}
+
+.contact-container {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 30px;
+  color: #2d3035;
+  font-weight: 600;
+}
+
+.contact-email {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-email p {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.contact-email strong {
+  color: #1884e7;
+  font-weight: 600;
+}
+
+.contact-platforms {
+  text-align: center;
+  margin: 40px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-platforms p {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.contact-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contact-link i {
+  font-size: 32px;
+  transition: transform 0.3s ease;
+}
+
+.contact-link span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.contact-link:hover i {
+  transform: scale(1.2);
+}
+
+.linkedin-link {
+  border-left-color: #0a66c2;
+}
+
+.linkedin-link i {
+  color: #0a66c2;
+}
+
+.linkedin-link:hover {
+  background: #f0f8ff;
+}
+
+.linkedin-link:hover span {
+  color: #0a66c2;
+}
+
+.facebook-link {
+  border-left-color: #1877f2;
+}
+
+.facebook-link i {
+  color: #1877f2;
+}
+
+.facebook-link:hover {
+  background: #f0f8ff;
+}
+
+.facebook-link:hover span {
+  color: #1877f2;
+}
+
+.github-link {
+  border-left-color: #333;
+}
+
+.github-link i {
+  color: #333;
+}
+
+.github-link:hover {
+  background: #f5f5f5;
+}
+
+.github-link:hover span {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 20px 10px;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .contact-links {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-link {
+    padding: 15px;
+  }
+
+  .contact-link i {
+    font-size: 28px;
+  }
+}

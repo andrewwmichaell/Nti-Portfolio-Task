@@ -1,0 +1,34 @@
+<button class="view-btn" type="button" (click)="openModal()">View More</button>
+
+<div class="modal-backdrop" *ngIf="isOpen" (click)="closeModal()">
+  <div class="modal-panel" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{ modalTitle }}</h3>
+      <button class="close-btn" type="button" (click)="closeModal()">x</button>
+    </div>
+
+    <div class="slider">
+      <button class="arrow" type="button" (click)="prevSlide()">&#10094;</button>
+      <div class="slide-content">
+        <img [src]="images[currentSlide]" alt="Project image" />
+      </div>
+      <button class="arrow" type="button" (click)="nextSlide()">&#10095;</button>
+    </div>
+
+    <div class="dots">
+      <span
+        *ngFor="let image of images; let i = index"
+        [class.active]="i === currentSlide"
+      ></span>
+    </div>
+
+    <div class="modal-body">
+      <h4>Description</h4>
+      <p>{{ description }}</p>
+      <p>
+        You can find this project on Github
+        <a [href]="githubUrl" target="_blank" rel="noopener noreferrer">here</a>
+      </p>
+    </div>
+  </div>
+</div>

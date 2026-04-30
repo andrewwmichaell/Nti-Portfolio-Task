@@ -1,0 +1,31 @@
+<div class="container">
+  @if (isLoading) {
+    <p>Loading home content...</p>
+  }
+
+  @if (loadError) {
+    <p>{{ loadError }}</p>
+  }
+
+  <div class="row">
+    <div class="col-1g shadow border m-1">
+      <div class="text-center">
+
+        <h3>{{ content.fullName }}</h3>
+        @if (content.profileImageUrl) {
+          <img [src]="content.profileImageUrl" alt="profile picture" width="256" height="256" class="rounded-circle">
+        }
+        
+        <h2>{{ content.aboutTitle }}</h2>
+        <p>{{ content.bio }}</p>
+      </div>
+    </div>
+
+    <div class="col-1g shadow border m-1">
+      <div class="text-center">
+        <h2>{{ content.featuredTitle }}</h2>
+        <p>{{ content.featuredDescription }}</p>
+      </div>
+    </div>
+  </div>
+</div>

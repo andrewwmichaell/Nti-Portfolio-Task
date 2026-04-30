@@ -1,0 +1,33 @@
+<section class="form-section">
+  <div class="form-card">
+    <h2>Send a Message</h2>
+    <form class="contact-form" (ngSubmit)="submitForm()">
+      <label>
+        Full Name
+        <input type="text" name="name" [(ngModel)]="contactForm.name" required />
+      </label>
+
+      <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="contactForm.email" required />
+      </label>
+
+      <label>
+        Subject
+        <input type="text" name="subject" [(ngModel)]="contactForm.subject" />
+      </label>
+
+      <label>
+        Message
+        <textarea name="message" [(ngModel)]="contactForm.message" required></textarea>
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="submitting">Send Message</button>
+      </div>
+
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+  </div>
+</section>

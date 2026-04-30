@@ -1,0 +1,29 @@
+.header-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 160px;
+  background: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.header-content {
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 400;
+  color: #222;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: #666;
+  letter-spacing: 5px;
+}

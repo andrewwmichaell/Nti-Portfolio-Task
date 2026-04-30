@@ -1,0 +1,164 @@
+.dashboard {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 16px;
+}
+
+.section-card {
+  background: #eef2f7;
+  border: none;
+  box-shadow: none;
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+h2,
+h3 {
+  margin: 0 0 12px;
+}
+
+.project-form {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: grid;
+  gap: 4px;
+  font-weight: 500;
+}
+
+input,
+textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+button {
+  width: fit-content;
+  padding: 8px 12px;
+  border: 1px solid #0d6efd;
+  background: #0d6efd;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.resume-editor-section {
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  border-radius: 10px;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.resume-editor-entry {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+}
+
+.message {
+  color: #1f2937;
+  margin: 0 0 12px;
+}
+
+.project-list {
+  display: grid;
+  gap: 10px;
+}
+
+.project-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.project-content {
+  display: grid;
+  gap: 4px;
+}
+
+.project-item h4 {
+  margin: 0 0 4px;
+}
+
+.project-item p {
+  margin: 0 0 4px;
+}
+
+.project-item button {
+  justify-self: start;
+}
+
+.contact-messages {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.contact-message {
+  padding: 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.contact-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.contact-message-header label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-message h4 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.contact-message p {
+  margin: 6px 0;
+  color: #333;
+}
+
+.project-actions {
+  display: flex;
+  gap: 8px;
+}

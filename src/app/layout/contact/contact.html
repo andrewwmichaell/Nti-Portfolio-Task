@@ -1,0 +1,29 @@
+<section class="contact-section">
+  <div class="contact-container">
+    <h1>Contact</h1>
+
+    <div class="contact-email">
+      <p>I can be reached at the following email: <strong>{{ contactInfo.email }}</strong></p>
+      <br>
+      <p>Feel free to connect with me on any of the following platforms:</p>
+    </div>
+
+    <div class="contact-links">
+      <a class="contact-link linkedin-link" [href]="contactInfo.linkedin" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-linkedin"></i>
+        <span>LinkedIn</span>
+      </a>
+
+      <a class="contact-link github-link" [href]="contactInfo.github" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-github"></i>
+        <span>Github</span>
+      </a>
+    </div>
+
+    <div class="contact-platforms">
+      <p>Or by filling this form below:</p>
+    </div>
+
+    <app-form></app-form>
+  </div>
+</section>

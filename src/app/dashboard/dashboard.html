@@ -1,0 +1,272 @@
+<section class="dashboard">
+  <section class="dashboard-section section-card">
+    <div class="section-header">
+      <h2>Home Content Editor</h2>
+      <button type="button" (click)="toggleEditHome()">
+        {{ isEditingHome ? 'Cancel Edit' : 'Edit' }}
+      </button>
+    </div>
+    <form class="project-form" (ngSubmit)="saveHomeContent()">
+    <label>
+      Name
+      <input type="text" name="fullName" [(ngModel)]="homeContent.fullName" [disabled]="!isEditingHome" />
+    </label>
+    <label>
+      About Title
+      <input type="text" name="aboutTitle" [(ngModel)]="homeContent.aboutTitle" [disabled]="!isEditingHome" />
+    </label>
+    <label>
+      Bio
+      <textarea name="bio" [(ngModel)]="homeContent.bio" [disabled]="!isEditingHome"></textarea>
+    </label>
+    <label>
+      Profile Image
+      @if (isEditingHome) {
+        <input type="file" accept="image/*" (change)="onHomeImageSelected($event)" />
+      } @else {
+        <small>Click Edit to enable image upload.</small>
+      }
+    </label>
+    @if (selectedHomeImage) {
+      <small>{{ selectedHomeImage.name }}</small>
+    }
+    <label>
+      Featured Title
+      <input type="text" name="featuredTitle" [(ngModel)]="homeContent.featuredTitle" [disabled]="!isEditingHome" />
+    </label>
+    <label>
+      Featured Description
+      <textarea name="featuredDescription" [(ngModel)]="homeContent.featuredDescription" [disabled]="!isEditingHome"></textarea>
+    </label>
+    <button type="submit">Save Home Content</button>
+  </form>
+  </section>
+
+  <section class="dashboard-section section-card">
+    <div class="section-header">
+      <h2>Portfolio Dashboard</h2>
+    </div>
+
+    <form class="project-form" (ngSubmit)="addProject()">
+    @if (editingProjectId) {
+      <small>Editing existing project. Press Add Project to save changes.</small>
+      <button type="button" (click)="cancelProjectEdit()">Cancel Edit</button>
+    }
+
+    <label>
+      Title
+      <input type="text" name="title" [(ngModel)]="newProject.title" required />
+    </label>
+
+    <label>
+      Description
+      <textarea name="description" [(ngModel)]="newProject.description" required></textarea>
+    </label>
+
+    <label>
+      Tech Tags (comma-separated)
+      <input type="text" name="techTags" [(ngModel)]="newProject.techTags" />
+    </label>
+
+    <label>
+      Github URL
+      <input type="url" name="githubUrl" [(ngModel)]="newProject.githubUrl" />
+    </label>
+
+    <label>
+      Project Photos (1 to 10)
+      <input type="file" accept="image/*" multiple (change)="onImagesSelected($event)" />
+    </label>
+
+    @if (selectedFiles.length) {
+      <small>{{ selectedFiles.length }} photo(s) selected</small>
+    }
+
+    <button type="submit">Add Project</button>
+  </form>
+
+  @if (message) {
+    <p class="message">{{ message }}</p>
+  }
+
+  <h3>Existing Projects</h3>
+
+  @if (loading) {
+    <p>Loading...</p>
+  } @else {
+    <div class="project-list">
+      @for (project of projects; track project._id) {
+        <article class="project-item">
+          <div class="project-content">
+            <h4>{{ project.title }}</h4>
+            <p>{{ project.description }}</p>
+            <small>Tags: {{ (project.techTags || []).join(', ') || 'None' }}</small>
+          </div>
+          <div class="project-actions">
+            <button type="button" (click)="startEditProject(project)">Edit</button>
+            <button type="button" (click)="softDeleteProject(project._id)">Remove</button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+  </section>
+
+  <section class="dashboard-section section-card">
+    <div class="section-header">
+      <h2>Contact Messages</h2>
+      <button type="button" (click)="clearAllContactMessages()" [disabled]="contactLoading || !contactMessages.length">
+        Clear All Messages
+      </button>
+    </div>
+    <p class="message" *ngIf="contactMessageStatus">{{ contactMessageStatus }}</p>
+
+  @if (contactLoading) {
+    <p>Loading contact messages...</p>
+  } @else if (contactMessages.length === 0) {
+    <p>No contact messages received yet.</p>
+  } @else {
+    <div class="contact-messages">
+      <article *ngFor="let msg of contactMessages" class="contact-message">
+        <div class="contact-message-header">
+          <label>
+            <input type="checkbox" [checked]="msg.isRead" (change)="markMessageRead(msg)" />
+            <span>{{ msg.isRead ? 'Read' : 'Unread' }}</span>
+          </label>
+          <span>{{ msg.createdAt | date:'medium' }}</span>
+        </div>
+        <h4>{{ msg.subject || 'No subject' }}</h4>
+        <p><strong>{{ msg.name }}</strong> &ndash; {{ msg.email }}</p>
+        <p>{{ msg.message }}</p>
+      </article>
+    </div>
+  }
+  </section>
+
+  <section class="dashboard-section section-card">
+    <div class="section-header">
+      <h2>Resume Content Editor</h2>
+      <button type="button" (click)="toggleEditResume()">
+        {{ isEditingResume ? 'Cancel Edit' : 'Edit' }}
+      </button>
+    </div>
+    <form class="project-form" (ngSubmit)="saveResumeContent()">
+      <label>
+        Resume PDF Upload
+        @if (isEditingResume) {
+          <input type="file" accept=".pdf" (change)="onResumePdfSelected($event)" />
+        } @else {
+          <small>Click Edit to enable PDF upload.</small>
+        }
+      </label>
+      @if (selectedResumePdf) {
+        <small>{{ selectedResumePdf.name }}</small>
+      }
+
+      <div
+        *ngFor="let sectionDef of resumeSectionDefs"
+        class="resume-editor-section"
+      >
+        <h3>{{ sectionDef.title }}</h3>
+
+        <div *ngIf="sectionDef.type === 'entries'">
+          <div
+            *ngFor="let entry of getSectionEditor(sectionDef.key).entries; let i = index"
+            class="resume-editor-entry"
+          >
+            <label>
+              {{ sectionDef.title }} Item Title
+              <input
+                type="text"
+                [name]="sectionDef.key + 'Title' + i"
+                [(ngModel)]="entry.title"
+                [disabled]="!isEditingResume"
+              />
+            </label>
+
+            <label>
+              Subtitle
+              <input
+                type="text"
+                [name]="sectionDef.key + 'Subtitle' + i"
+                [(ngModel)]="entry.subtitle"
+                [disabled]="!isEditingResume"
+              />
+            </label>
+
+            <label>
+              Details (one item per line)
+              <textarea
+                [name]="sectionDef.key + 'Bullets' + i"
+                [(ngModel)]="entry.bulletsText"
+                [disabled]="!isEditingResume"
+              ></textarea>
+            </label>
+
+            <button
+              type="button"
+              (click)="removeResumeEntry(sectionDef.key, i)"
+              [disabled]="!isEditingResume"
+            >
+              Remove
+            </button>
+          </div>
+
+          <button
+            type="button"
+            (click)="addResumeEntry(sectionDef.key)"
+            [disabled]="!isEditingResume"
+          >
+            Add {{ sectionDef.title }} Item
+          </button>
+        </div>
+
+        <div *ngIf="sectionDef.type === 'columns'">
+          <div
+            *ngFor="let column of getSectionEditor(sectionDef.key).columns; let i = index"
+            class="resume-editor-entry"
+          >
+            <label>
+              Skill Heading
+              <input
+                type="text"
+                [name]="sectionDef.key + 'Heading' + i"
+                [(ngModel)]="column.heading"
+                [disabled]="!isEditingResume"
+              />
+            </label>
+
+            <label>
+              Skills (one per line)
+              <textarea
+                [name]="sectionDef.key + 'Items' + i"
+                [(ngModel)]="column.itemsText"
+                [disabled]="!isEditingResume"
+              ></textarea>
+            </label>
+
+            <button
+              type="button"
+              (click)="removeResumeSkillColumn(i)"
+              [disabled]="!isEditingResume"
+            >
+              Remove
+            </button>
+          </div>
+
+          <button
+            type="button"
+            (click)="addResumeSkillColumn()"
+            [disabled]="!isEditingResume"
+          >
+            Add skills group
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!isEditingResume">
+        Save Resume Content
+      </button>
+    </form>
+  </section>
+</section>

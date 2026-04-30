@@ -1,0 +1,51 @@
+<section class="resume-section">
+  <div class="resume-container">
+    @if (content.pdfUrl) {
+    <div class="resume-download-wrap">
+      <button type="button" class="resume-download-btn" (click)="downloadResume()" [disabled]="!content.pdfUrl">
+        Download PDF Resume
+      </button>
+    </div>
+    }
+
+    @for (section of sections; track section.key) {
+    <div class="resume-block">
+      <button type="button" class="resume-block-header" (click)="toggleSection(section.key)">
+        <span>{{ section.title }}</span>
+        <span class="arrow" [class.open]="isOpen(section.key)">▶</span>
+      </button>
+
+      @if (isOpen(section.key)) {
+      <div class="resume-block-content">
+        @if (section.type === 'columns') {
+        <div class="skills-columns">
+          @for (column of getSkills(); track column.heading) {
+          <div>
+            <h3>{{ column.heading }}</h3>
+            <ul>
+              @for (item of column.items; track item) {
+              <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+          }
+        </div>
+        } @else {
+        @for (entry of getEntries(section.key); track entry.title) {
+        <div class="resume-entry">
+          <h3>{{ entry.title }}</h3>
+          <h4>{{ entry.subtitle }}</h4>
+          <ul>
+            @for (bullet of entry.bullets; track bullet) {
+            <li>{{ bullet }}</li>
+            }
+          </ul>
+        </div>
+        }
+        }
+      </div>
+      }
+    </div>
+    }
+  </div>
+</section>
